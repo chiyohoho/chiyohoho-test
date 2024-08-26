@@ -51,7 +51,6 @@ const Playground = ({ number, isStart, setIsStart, setIsWin, reset, setCurrentIn
                             border="2px solid black"
                             bg='white'
                             visibility={index < currentIndex ? 'hidden' : 'visible'}
-                            transition="background-color 0.5s ease-in-out, opacity 0.5s ease-in-out"
                         >
                             {index + 1}
                         </Flex>

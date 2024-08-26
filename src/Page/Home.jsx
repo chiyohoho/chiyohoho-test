@@ -20,7 +20,6 @@ const Home = () => {
     const onSubmit = (data) => {
         const inputNumber = parseFloat(data.number)
 
-
         setIsStart(true)
         setNumber(inputNumber)
         setIsWin(1)
@@ -54,8 +53,8 @@ const Home = () => {
                                     message: "Min: 1"
                                 },
                                 max: {
-                                    value: 99999,
-                                    message: "Max: 99999"
+                                    value: 9999,
+                                    message: "Max: 9999"
                                 }
                             })}
                         />

@@ -14,7 +14,7 @@ const Timer = ({ isStart, timer, setTimer }) => {
 
         return () => clearInterval(timerRef.current)
 
-    }, [isStart])
+    }, [isStart, setTimer])
 
     return (
         <>
