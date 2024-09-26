@@ -1,8 +1,10 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Input } from "@chakra-ui/react"
+import { Box, Button, ButtonGroup, Flex, FormControl, FormErrorMessage, Heading, Input } from "@chakra-ui/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Timer from "../Components/Timer"
 import Playground from "../Components/Playground"
+import RulesModal from "../Components/Rules"
+import DarkModeButton from "../Components/DarkMode"
 
 const Home = () => {
     const {
@@ -32,14 +34,16 @@ const Home = () => {
     return (
         <Box className="w-full h-full">
             <Flex justifyContent={'space-between'}>
-                <Heading className="text-gray-600" mb={5}>Quick Response Game</Heading>
-                <Heading color={isWin == 2 ? 'green' : 'red'} visibility={isWin == 1 ? 'hidden' : 'visible'}>
-                    {isWin == 2 ? 'You Win' : 'You Lose'}
-                </Heading>
+                <Heading className="" mb={5}>Quick Response Game</Heading>
 
+                <ButtonGroup>
+                    <RulesModal />
+                    <DarkModeButton />
+                </ButtonGroup>
             </Flex>
+
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl isInvalid={errors.number} h={70}>
+                <FormControl isInvalid={errors.number}>
                     <Flex gap={2} alignItems={'center'}>
                         <Input
                             w={210}
@@ -59,7 +63,7 @@ const Home = () => {
                             })}
                         />
 
-                        <Button colorScheme="teal" type="submit">
+                        <Button variant={'outline'} colorScheme="facebook" type="submit">
                             {!isStart ? 'Start' : 'Restart'}
                         </Button>
 
@@ -70,6 +74,10 @@ const Home = () => {
                         {errors.number && errors.number.message}
                     </FormErrorMessage>
                 </FormControl>
+
+                <Heading color={isWin == 2 ? 'green' : 'red'} visibility={isWin == 1 ? 'hidden' : 'visible'}>
+                    {isWin == 2 ? 'You Win' : 'You Lose'}
+                </Heading>
             </form>
 
             <Playground setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} reset={reset} setIsWin={setIsWin} setIsStart={setIsStart} number={number} isStart={isStart} />

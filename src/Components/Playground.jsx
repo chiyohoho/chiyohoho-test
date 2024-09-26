@@ -1,11 +1,12 @@
 import { Box, Center, Flex } from '@chakra-ui/react'
 import { useEffect, useMemo } from 'react'
+import { motion } from 'framer-motion'
 
 const Playground = ({ number, isStart, setIsStart, setIsWin, reset, setCurrentIndex, currentIndex }) => {
     const fakeArray = new Array(number).fill(null)
 
     const generateRandomPosition = () => {
-        const randomX = Math.random() * 96.5
+        const randomX = Math.random() * 96
         const randomY = Math.random() * 93
         return {
             position: "absolute",
@@ -37,28 +38,35 @@ const Playground = ({ number, isStart, setIsStart, setIsWin, reset, setCurrentIn
     }, [currentIndex, isStart, number, setIsWin, setIsStart, reset, setCurrentIndex])
 
     return (
-        <Box className="h-[500px] w-[100%] relative overflow-hidden" border="1px solid black">
-            {isStart ?
+        <Box className="h-[500px] w-[100%] relative overflow-hidden" border="1px solid #ccc" rounded={5}>
+            {isStart ? (
                 fakeArray.map((_, index) => {
                     const zIndex = number - index
                     return (
-                        <Flex
+                        <motion.div
                             onClick={() => clearNumber(index)}
                             key={index}
-                            zIndex={zIndex}
-                            className="absolute min-w-10 min-h-10 rounded-full cursor-pointer items-center justify-center"
-                            style={positions[index]}
-                            border="2px solid black"
-                            bg='white'
-                            visibility={index < currentIndex ? 'hidden' : 'visible'}
+                            style={{ zIndex, ...positions[index] }}
+                            initial={{ backgroundColor: 'transparent', opacity: 1 }}
+                            whileTap={{ backgroundColor: 'red' }}
+                            animate={{
+                                opacity: index < currentIndex ? 0 : 1,
+                                backgroundColor: index < currentIndex ? 'red' : 'transparent'
+                            }}
+                            transition={{ duration: 0.5 }}
+                            className="absolute h-10 w-10 rounded-full cursor-pointer items-center justify-center border-2 border-gray-500"
                         >
-                            {index + 1}
-                        </Flex>
+                            <Center className='w-full h-full'>
+                                {index + 1}
+                            </Center>
+                        </motion.div>
                     )
                 })
-                :
-                <Center className='text-[20px] w-full h-full'>Enter a random number and click start</Center>
-            }
+            ) : (
+                <Center className="text-[20px] w-full h-full">
+                    Enter a random number and click start
+                </Center>
+            )}
         </Box>
     )
 }
