@@ -1,8 +1,9 @@
-import { Box, Center, Flex } from '@chakra-ui/react'
+import { Box, Center, Flex, useColorMode } from '@chakra-ui/react'
 import { useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
 const Playground = ({ number, isStart, setIsStart, setIsWin, reset, setCurrentIndex, currentIndex }) => {
+    const { colorMode } = useColorMode()
     const fakeArray = new Array(number).fill(null)
 
     const generateRandomPosition = () => {
@@ -47,11 +48,11 @@ const Playground = ({ number, isStart, setIsStart, setIsWin, reset, setCurrentIn
                             onClick={() => clearNumber(index)}
                             key={index}
                             style={{ zIndex, ...positions[index] }}
-                            initial={{ backgroundColor: 'transparent', opacity: 1 }}
+                            initial={{ backgroundColor: (colorMode === 'dark' ? 'black' : 'white'), opacity: 1 }}
                             whileTap={{ backgroundColor: 'red' }}
                             animate={{
                                 opacity: index < currentIndex ? 0 : 1,
-                                backgroundColor: index < currentIndex ? 'red' : 'transparent'
+                                backgroundColor: index < currentIndex ? 'red' : (colorMode === 'dark' ? 'black' : 'white')
                             }}
                             transition={{ duration: 0.5 }}
                             className="absolute h-10 w-10 rounded-full cursor-pointer items-center justify-center border-2 border-gray-500"
