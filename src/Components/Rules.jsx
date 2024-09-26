@@ -17,7 +17,7 @@ const RulesModal = () => {
 
     return (
         <>
-            <Button colorScheme='facebook' w={'200px'} variant={'outline'} onClick={onOpen}>
+            <Button colorScheme='facebook' w={'120px'} variant={'outline'} onClick={onOpen}>
                 How to play ?
             </Button>
 

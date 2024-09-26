@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, FormControl, FormErrorMessage, Heading, Input } from "@chakra-ui/react"
+import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Input, Wrap } from "@chakra-ui/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Timer from "../Components/Timer"
@@ -36,10 +36,10 @@ const Home = () => {
             <Flex justifyContent={'space-between'}>
                 <Heading className="" mb={5}>Quick Response Game</Heading>
 
-                <ButtonGroup>
+                <Wrap className="gap-1">
                     <RulesModal />
                     <DarkModeButton />
-                </ButtonGroup>
+                </Wrap>
             </Flex>
 
             <form onSubmit={handleSubmit(onSubmit)}>
